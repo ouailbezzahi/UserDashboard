@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import UserList from "./components/UserList";
 import UserDetails from "./components/UserDetails";
 import SearchBar from "./components/SearchBar";
+import AddUser from "./components/AddUser";
 
 function App() {
 
@@ -35,6 +36,10 @@ function App() {
       });
   }, []);
 
+  const handleAddUser = (newUser) => {
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+  }
+
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -50,6 +55,9 @@ function App() {
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto' }}>
       <h1>User Dashboard</h1>
+
+      {/*Add user form*/}
+      <AddUser onAddUser={handleAddUser} />
 
       {/*Selected user details*/}
       <UserDetails 
