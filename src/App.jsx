@@ -15,9 +15,6 @@ function App() {
   //state for search bar
   const [searchQuery, setSearchQuery] = useState("");
 
-  //state for selected user
-  const [selectedUser, setSelectedUser] = useState(null);
-
   useEffect(() => {
     //fetching data from API
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -66,10 +63,10 @@ function App() {
             </div>
 
             {/*Selected user details*/}
-            <UserDetails
+            {/* <UserDetails
               user={selectedUser}
               onClose={() => setSelectedUser(null)}
-            />
+            /> */}
 
             {/*Search bar*/}
             <SearchBar
@@ -80,11 +77,28 @@ function App() {
             {/*Users list*/}
             <UserList
               users={filteredUsers}
-              onSelectUser={setSelectedUser}
             />
           </div>
         }
       />
+
+      <Route
+        path="/user-details/:id"
+        element={
+          <div style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "800px", margin: "0 auto" }}>
+            <h1>User Details</h1>
+
+            <UserDetails
+              users={users}
+            />
+
+            <div style={{ marginBottom: "20px" }}>
+              <Link to="/">Back to dashboard</Link>
+            </div>
+          </div>
+        }
+      />
+      
       <Route
         path="/add-user"
         element={
