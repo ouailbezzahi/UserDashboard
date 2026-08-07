@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link, Route, Routes } from "react-router-dom";
 import UserList from "./components/UserList";
 import UserDetails from "./components/UserDetails";
 import SearchBar from "./components/SearchBar";
@@ -53,30 +54,52 @@ function App() {
   }
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto' }}>
-      <h1>User Dashboard</h1>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "800px", margin: "0 auto" }}>
+            <h1>User Dashboard</h1>
 
-      {/*Add user form*/}
-      <AddUser onAddUser={handleAddUser} />
+            <div style={{ marginBottom: "20px" }}>
+              <Link to="/add-user">Add a new user</Link>
+            </div>
 
-      {/*Selected user details*/}
-      <UserDetails 
-      user={selectedUser} 
-      onClose={() => setSelectedUser(null)}
-      />
-      
-      {/*Search bar*/}
-      <SearchBar 
-      searchQuery={searchQuery} 
-      setSearchQuery={setSearchQuery}
-      />
+            {/*Selected user details*/}
+            <UserDetails
+              user={selectedUser}
+              onClose={() => setSelectedUser(null)}
+            />
 
-      {/*Users list*/}
-      <UserList
-      users={filteredUsers} 
-      onSelectUser={setSelectedUser}
+            {/*Search bar*/}
+            <SearchBar
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+
+            {/*Users list*/}
+            <UserList
+              users={filteredUsers}
+              onSelectUser={setSelectedUser}
+            />
+          </div>
+        }
       />
-    </div>
+      <Route
+        path="/add-user"
+        element={
+          <div style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "800px", margin: "0 auto" }}>
+            <h1>Add User</h1>
+
+            <div style={{ marginBottom: "20px" }}>
+              <Link to="/">Back to dashboard</Link>
+            </div>
+
+            <AddUser onAddUser={handleAddUser} />
+          </div>
+        }
+      />
+    </Routes>
   );
 }
 

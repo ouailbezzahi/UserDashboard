@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddUser({ onAddUser }) {
+    const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -43,6 +45,8 @@ function AddUser({ onAddUser }) {
     setPhone("");
     setWebsite("");
     setAddress({ street: "", suite: "", city: "", zipcode: "" });
+
+        navigate("/");
   }
 
   return (
